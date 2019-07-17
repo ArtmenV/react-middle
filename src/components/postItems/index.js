@@ -5,26 +5,22 @@ import { requestApiData } from "../../redux/ac";
 import { bindActionCreators } from "redux";
 
 class Data extends Component {
-
   componentDidMount() {
     this.props.requestApiData();
   }
 
-  posts = (x, i) => (
-    <div key={x.id}>
-      <h1>{x.id}</h1>
-      <h3>{x.title}</h3>
-      <h5>{x.body}</h5>
+  posts = (post, id) => (
+    <div key={post.id}>
+      <h1>{post.id}</h1>
+      <h3>{post.title}</h3>
+      <h5>{post.body}</h5>
     </div>
   );
-
 
   render() {
     return (
       <div className="container">
-        <div>
-          {this.props.data.map(this.posts)}
-        </div>
+        <div>{this.props.data.map(this.posts)}</div>
         <div className="container__count2">
           <button size="large" color="success" className="green">
             plus
@@ -38,9 +34,14 @@ class Data extends Component {
   }
 }
 
-const mapStateToProps = state => ({ data: state.data });
+const mapStateToProps = ({ data }) => ({
+  data
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ requestApiData }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Data);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Data);
