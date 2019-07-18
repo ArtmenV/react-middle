@@ -3,6 +3,7 @@ import rootReducer from "../reducers";
 import createSagaMiddleware from 'redux-saga'
 import mySaga from '../sagas/postsSaga.js'
 
+
 const sagaMiddleware = createSagaMiddleware()
 
 const composeEnhancers =
